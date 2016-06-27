@@ -10,6 +10,5 @@ RUN wget http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_li
     gdebi --n wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
 
 ADD conf.d/symfony.ini /etc/php5/cli/conf.d/
-ADD conf.d/geoip.ini /etc/php5/mods-available/geoip.ini
 
 RUN usermod -u 1000 www-data
