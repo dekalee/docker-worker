@@ -15,5 +15,3 @@ ADD conf.d/symfony.ini /etc/php5/cli/conf.d/
 ADD conf.d/redis.ini /etc/php5/cli/conf.d/
 
 RUN usermod -u 1000 www-data
-
-CMD tail -f /dev/null
