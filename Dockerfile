@@ -2,9 +2,14 @@ FROM debian:jessie
 
 MAINTAINER Nicolas Thal <nico.th4l@gmail.com>
 
-RUN apt-get update && apt-get install -y php5-common php5-cli php5-mcrypt php5-mysql php5-apcu php5-gd php5-imagick php5-curl php5-intl php5-tidy php5-pgsql php5-geoip php5-dev
+RUN apt-get update \
+    && apt-get install -y curl \
+    && echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list \
+    && curl -sS https://www.dotdeb.org/dotdeb.gpg | apt-key add - \
+    && apt-get update \
+    && apt-get install -y php7.0-common php7.0-cli php7.0-mcrypt php7.0-mysql php7.0-apcu php7.0-gd php7.0-imagick php7.0-curl php7.0-intl php7.0-tidy php7.0-pgsql php7.0-geoip php7.0-dev
 
-RUN yes yes | pecl install redis-2.2.7
+RUN yes yes | pecl install redis-3.0.0
 
 RUN apt-get install -y build-essential libssl-dev libxrender-dev wget gdebi
 WORKDIR /tmp
