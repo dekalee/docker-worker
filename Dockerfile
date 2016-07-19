@@ -23,7 +23,10 @@ WORKDIR /tmp
 RUN wget http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb && \
     gdebi --n wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
 
-ADD conf.d/symfony.ini /etc/php7.0/cli/conf.d/
-ADD conf.d/redis.ini /etc/php7.0/cli/conf.d/
+ADD conf.d/symfony.ini /etc/php7.0/mods-available/
+ADD conf.d/redis.ini /etc/php7.0/mods-available/
+
+RUN ln -sf /etc/php/7.0/mods-available/redis.ini /etc/php/7.0/cli/conf.d/20-redis.ini
+RUN ln -sf /etc/php/7.0/mods-available/symfony.ini /etc/php/7.0/cli/conf.d/21-symfony.ini
 
 RUN usermod -u 1000 www-data
