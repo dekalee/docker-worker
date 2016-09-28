@@ -47,5 +47,6 @@ RUN wget http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_li
     gdebi --n wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
 
 ADD conf.d/symfony.ini /usr/local/etc/php/conf.d/
+ADD conf.d/memory.ini /usr/local/etc/php/conf.d/
 
 RUN usermod -u 1000 www-data
