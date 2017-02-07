@@ -17,6 +17,7 @@ RUN apt-get update \
         libmagickcore-dev \
         libgeoip-dev \
         git \
+        cron \
         g++
 
 RUN docker-php-ext-configure intl && docker-php-ext-install intl
