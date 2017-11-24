@@ -44,8 +44,10 @@ RUN pecl install redis \
 
 RUN apt-get install -y build-essential libssl-dev libxrender-dev wget gdebi
 WORKDIR /tmp
-RUN wget http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb && \
-    gdebi --n wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
+RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz && \
+    tar -xf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz && \
+    cp wkhtmltox/bin/wkhtmltopdf /usr/local/bin && \
+    cp wkhtmltox/bin/wkhtmltoimage /usr/local/bin
 
 ADD conf.d/symfony.ini /usr/local/etc/php/conf.d/
 ADD conf.d/memory.ini /usr/local/etc/php/conf.d/
