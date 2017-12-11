@@ -1,13 +1,13 @@
-FROM php:7.1-cli
+FROM php:7.2-cli
 
 MAINTAINER Nicolas Thal <nico.th4l@gmail.com>
+MAINTAINER Jérémy GIGNON <jeremy@gignon.fr>
 
 RUN apt-get update \
     && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
-        libmcrypt-dev \
-        libpng12-dev \
+        libpng-dev \
         libcurl4-gnutls-dev \
         libpq-dev \
         zlib1g-dev \
@@ -18,14 +18,15 @@ RUN apt-get update \
         libgeoip-dev \
         git \
         cron \
-        g++
+        g++ \
+        gnupg2
 
 RUN docker-php-ext-configure intl && docker-php-ext-install intl
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
 
-RUN docker-php-ext-install -j$(nproc) mcrypt pdo_mysql pdo_pgsql opcache curl tidy zip
+RUN docker-php-ext-install -j$(nproc) pdo_mysql pdo_pgsql opcache curl tidy zip
 
 RUN pecl install imagick \
     && docker-php-ext-enable imagick
@@ -55,7 +56,7 @@ ADD conf.d/memory.ini /usr/local/etc/php/conf.d/
 RUN usermod -u 1000 www-data
 
 RUN \
-  wget -qO - https://deb.nodesource.com/setup_4.x | bash - && \
+  wget -qO - https://deb.nodesource.com/setup_8.x | bash - && \
   apt-get -qq update -y && \
   apt-get -qq install -y nodejs && \
   apt-get -qq clean -y && rm -rf /var/lib/apt/lists/*
