@@ -56,7 +56,7 @@ ADD conf.d/memory.ini /usr/local/etc/php/conf.d/
 RUN usermod -u 1000 www-data
 
 RUN \
-  wget -qO - https://deb.nodesource.com/setup_8.x | bash - && \
+  wget -qO - https://deb.nodesource.com/setup_4.x | bash - && \
   apt-get -qq update -y && \
   apt-get -qq install -y nodejs && \
   apt-get -qq clean -y && rm -rf /var/lib/apt/lists/*
