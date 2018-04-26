@@ -69,3 +69,11 @@ RUN \
   tar -xzf statsd.tar.gz && \
   mv statsd-0.8.0 statsd && \
   rm -f statsd.tar.gz
+
+RUN apt-get update \
+    && apt-get install -y wget gnupg2 \
+    && wget -O - https://packagecloud.io/gpg.key | apt-key add - \
+    && echo "deb http://packages.blackfire.io/debian any main" | tee /etc/apt/sources.list.d/blackfire.list \
+    && apt-get update \
+    && apt-get install blackfire-agent \
+    && apt-get install blackfire-php
