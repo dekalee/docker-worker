@@ -1,4 +1,4 @@
-FROM php:7.2-cli
+FROM php:7.3-cli
 
 MAINTAINER Nicolas Thal <nico.th4l@gmail.com>
 MAINTAINER Jérémy GIGNON <jeremy@gignon.fr>
@@ -16,6 +16,7 @@ RUN apt-get update \
         libmagickwand-dev \
         libmagickcore-dev \
         libgeoip-dev \
+        libzip-dev \
         git \
         cron \
         g++ \
@@ -73,6 +74,7 @@ RUN \
 RUN apt-get update \
     && apt-get install -y wget gnupg2 \
     && wget -O - https://packagecloud.io/gpg.key | apt-key add - \
+    && wget -q -O - https://packages.blackfire.io/gpg.key | apt-key add - \
     && echo "deb http://packages.blackfire.io/debian any main" | tee /etc/apt/sources.list.d/blackfire.list \
     && apt-get update \
     && apt-get install blackfire-agent \
