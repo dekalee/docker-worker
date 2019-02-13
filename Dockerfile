@@ -41,7 +41,7 @@ RUN git clone https://github.com/Zakay/geoip.git \
     && make install \
     && docker-php-ext-enable geoip
 
-RUN pecl install redis \
+RUN pecl install redis-3.1.4 \
     && docker-php-ext-enable redis
 
 RUN apt-get install -y build-essential libssl-dev libxrender-dev wget gdebi
