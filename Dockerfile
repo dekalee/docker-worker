@@ -79,3 +79,10 @@ RUN apt-get update \
     && apt-get update \
     && apt-get install blackfire-agent \
     && apt-get install blackfire-php
+
+RUN wget http://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-6-amd64.deb \
+    && dpkg -i couchbase-release-1.0-6-amd64.deb \
+    && apt-get update \
+    && apt-get install libcouchbase-dev build-essential zlib1g-dev \
+    && pecl install couchbase \
+    && echo "extension=couchbase.so" > /usr/local/etc/php/conf.d/docker-php-ext-couchbase.ini
