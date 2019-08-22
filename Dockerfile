@@ -21,7 +21,11 @@ RUN apt-get update \
         cron \
         g++ \
         gnupg2 \
-        build-essential libssl-dev libxrender-dev wget gdebi
+        build-essential \
+        libssl-dev \
+        libxrender-dev \
+        wget \
+        gdebi
 
 RUN docker-php-ext-configure intl && docker-php-ext-install intl
 
@@ -67,5 +71,10 @@ RUN wget http://packages.couchbase.com/releases/couchbase-release/couchbase-rele
     && apt-get install -y libcouchbase-dev \
     && pecl install couchbase \
     && echo "extension=couchbase.so" > /usr/local/etc/php/conf.d/docker-php-ext-couchbase.ini
+
+# Install Supervisor
+RUN apt-get update \
+    && apt-get install -y python-pip \
+    && pip install supervisor
 
 COPY --from=composer:1.8 /usr/bin/composer /usr/bin/composer
